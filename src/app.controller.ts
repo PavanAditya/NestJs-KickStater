@@ -1,12 +1,18 @@
-import { Body, Controller, Get, Header, Param, Post, Query, Redirect, Req } from '@nestjs/common';
+import { Body, Controller, Get, Header, Param, Post, Query, Redirect, Req, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AppInterceptor } from './app.interceptor';
 
 interface CreateCatDto {
   id: number;
   name: string;
 }
 
+// ? Creates a new Instance of the AppInterceptor (Needs to be places as a decorator to the class name)
+// @UseInterceptors(new AppInterceptor())
 @Controller()
+@UseInterceptors(AppInterceptor)
+
+
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
